@@ -1,0 +1,48 @@
+# 书稿与素材——一律不进仓库（仓库只放技能文档与脚本）
+*.docx
+*.pdf
+*.md.bak*
+*.bak
+*.log
+
+# 图片与音视频
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.wav
+*.mp3
+*.m4a
+*.mp4
+*.mkv
+
+# 素材、中间产物、转写输出目录
+materials/
+materials-ocr/
+sec-md/
+sec-md.ai/
+cases/
+out/
+preview/
+models/
+album/
+figures/
+
+# 纯文本素材（转写稿、讲义提取稿等）
+*.txt
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# 系统与编辑器
+Thumbs.db
+Desktop.ini
+.DS_Store
+~$*
+.vscode/
+.idea/
