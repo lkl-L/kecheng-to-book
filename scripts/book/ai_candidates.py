@@ -21,9 +21,9 @@ BOOKS = [
     "经典课实录",
     "赋文课实录",
     "图文课实录",
-    "日课课实录",
+    "【书名】",
     "实战课实录",
-    "微课堂实录",
+    "【书名】",
 ]
 LONG_MIN = 181
 SHORT_MIN, SHORT_MAX = 12, 55
@@ -36,7 +36,7 @@ def collect(path):
     long_items, short_items = [], []
     for i, l in enumerate(lines, 1):
         s = l.strip()
-        if s == "【经文】":
+        if s == "【原文】":   # 正文块标记
             in_j = True
             continue
         if s in ("【讲解】", "【原文】", "【白话】", "【注解】"):

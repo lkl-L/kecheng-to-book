@@ -4,7 +4,7 @@
 版式要点
   · A4，四周大留白（上 2.6 / 下 2.4 / 左右 3.0 cm）
   · 正文 宋体 11.5pt，行距 1.6 倍，段后 5pt，首行缩进 2 字符，两端对齐
-  · 经文块 楷体 + 左右缩进；【经文】【讲解】标记作小标题
+  · 原文块 楷体 + 左右缩进；【原文】【讲解】标记作小标题
   · 卷标题、讲标题均另起一页（page_break_before）
   · 封面页 / 编者说明页 / 目录页 各自独立成页
   · 页眉（书名 + 细线）、页脚（居中页码），首页不显示
@@ -18,15 +18,15 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-MD = os.path.join(BASE, "微课堂实录.md")
-OUT = os.path.join(BASE, "微课堂实录.docx")
-OUT_FALLBACK = os.path.join(BASE, "微课堂实录（精排版）.docx")
+MD = os.path.join(BASE, "【书名】.md")
+OUT = os.path.join(BASE, "【书名】.docx")
+OUT_FALLBACK = os.path.join(BASE, "【书名】（精排版）.docx")
 
 SONG, HEI, KAI = "宋体", "黑体", "楷体"
 EN = "Times New Roman"
 BODY = 11.5
 
-BOOK_TITLE = "微课堂实录"
+BOOK_TITLE = "【书名】"
 
 
 # ---------- 底层工具 ----------
@@ -171,7 +171,7 @@ def add_body(doc, text, cite=False):
 
 
 def add_marker(doc, text):
-    """【经文】【讲解】标记行 → 小标题式"""
+    """【原文】【讲解】标记行 → 小标题式"""
     p = doc.add_paragraph()
     pf = p.paragraph_format
     pf.space_before = Pt(12)
@@ -236,7 +236,7 @@ def main():
     p.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_after = Pt(28)
     p.paragraph_format.line_spacing = 1.25
-    run_font(p.add_run("微课堂实录"), HEI, size=28, bold=True)
+    run_font(p.add_run("【书名】"), HEI, size=28, bold=True)
     for t in head_short:
         pp = doc.add_paragraph()
         pp.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -321,7 +321,7 @@ def main():
             in_cite = False
         elif kind == "mark":
             add_marker(doc, text)
-            in_cite = (text == "【经文】")
+            in_cite = (text == "【原文】")   # 正文块标记，按你的稿子改
         else:
             add_body(doc, text, cite=in_cite)
 

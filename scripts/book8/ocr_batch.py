@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """批量 OCR 讲义扫描件（印刷体 PDF，无文字层），输出到 materials-ocr/。
 
-· 自动用文件名里的数字密码解锁（791780048）
+· 自动用文件名里的数字密码解锁（00000000）
 · 每页 200dpi 渲染 → RapidOCR → 按行拼接 → 按文件存 txt
 · 断点续做：已存在且字数 > 0 的文件跳过；单文件内按页缓存（.part）
 """
@@ -18,20 +18,20 @@ sys.stdout.reconfigure(encoding="utf-8")
 SRC = r"<资料目录>"
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "materials-ocr")
 os.makedirs(OUT, exist_ok=True)
-PWD = "791780048"
+PWD = "00000000"
 
 # 要 OCR 的扫描件（手写笔记排除）
 TARGETS = [
-    r"八字\书籍整理\基础-第五版.pdf",
-    r"八字\书籍整理\2017年11月密码：791780048.pdf",
-    r"八字\书籍整理\2018年3月密码：791780048.pdf",
-    r"八字\书籍整理\2018年5月密码：791780048.pdf",
-    r"八字\书籍整理\2018年6月密码：791780048.pdf",
-    r"八字\书籍整理\2018年11月.pdf",
-    r"八字\书籍整理\2018年12月密码：791780048.pdf",
-    r"八字\书籍整理\2019年2月深圳班讲座.pdf",
-    r"八字\书籍整理\2019年7月深圳班.pdf",
-    r"基础\2017年惠州.pdf",
+    r"书籍整理\基础-第五版.pdf",
+    r"书籍整理\2017年11月密码：00000000.pdf",
+    r"书籍整理\2018年3月密码：00000000.pdf",
+    r"书籍整理\2018年5月密码：00000000.pdf",
+    r"书籍整理\2018年6月密码：00000000.pdf",
+    r"书籍整理\2018年11月.pdf",
+    r"书籍整理\2018年12月密码：00000000.pdf",
+    r"书籍整理\2019年2月课堂记录.pdf",
+    r"书籍整理\2019年7月课堂记录.pdf",
+    r"基础\2017年课堂记录.pdf",
     r"基础\2018年5月.pdf",
 ]
 
@@ -91,7 +91,7 @@ def main():
     for rel in TARGETS:
         src = os.path.join(SRC, rel)
         base = os.path.splitext(os.path.basename(src))[0]
-        base = base.replace("密码：791780048", "").replace("密码:791780048", "")
+        base = base.replace("密码：00000000", "").replace("密码:00000000", "")
         out = os.path.join(OUT, base + ".txt")
         if os.path.exists(out) and os.path.getsize(out) > 500:
             print("跳过（已完成）", base)

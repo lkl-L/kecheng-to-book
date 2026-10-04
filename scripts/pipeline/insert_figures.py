@@ -6,7 +6,7 @@ import re
 import sys
 
 BASE = r"<项目根>"
-FIGDIR = os.path.join(BASE, "figures/qjj")
+FIGDIR = os.path.join(BASE, "figures/<课程前缀>")
 
 
 def parse_captions(md_path):

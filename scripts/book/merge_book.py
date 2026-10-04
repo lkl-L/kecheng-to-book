@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """把 60 个小节 md 合并成全书 markdown
-体例：第一编 撼龙经（001-026）/ 第二编 疑龙经（027-060）
-【经文】块转 markdown 引用（> 前缀），【讲解】标记去除
+体例：第一编 【编名甲】（001-026）/ 第二编 【编名乙】（027-060）
+【原文】块转 markdown 引用（> 前缀），【讲解】标记去除
 """
 import os
 import re
@@ -13,17 +13,17 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(BASE, "sec-md")
 OUT = os.path.join(BASE, "经典课实录.md")
 
-PART1 = (1, 26, "第一编 撼龙经")
-PART2 = (27, 60, "第二编 疑龙经")
+PART1 = (1, 26, "第一编 【编名甲】")
+PART2 = (27, 60, "第二编 【编名乙】")
 
 INTRO = {
-    "第一编 撼龙经": "本编为 2024 年私教课《撼龙经》部分整理稿，凡二十六节，自总纲起，历统局、垣局、九星、变穴、吉凶诸篇，至全书总结止。",
-    "第二编 疑龙经": "本编为 2024 年私教课《疑龙经》部分整理稿，凡三十四节，依次论龙、论局、论穴，并附以古证今、僧道嗣续、阳宅、日课诸篇。",
+    "第一编 【编名甲】": "本编为【课程名】第一部分整理稿，凡二十六节，自总纲起至全书总结止。",
+    "第二编 【编名乙】": "本编为【课程名】第二部分整理稿，凡三十四节。",
 }
 
 
 def convert_section(text):
-    """保留【经文】【讲解】标记行（docx 中作为独立段落）；返回 (标题, 正文md)"""
+    """保留【原文】【讲解】标记行（docx 中作为独立段落）；返回 (标题, 正文md)"""
     lines = text.split("\n")
     title = ""
     body = []
@@ -46,9 +46,9 @@ def convert_section(text):
 
 def main():
     book = []
-    book.append("# 《撼龙经》《疑龙经》精讲实录\n")
+    book.append("# 《【书名】》精讲实录\n")
     book.append("讲师 2024 年私教课 · 六十讲全文整理本\n")
-    book.append("—— 经文原文与白话讲解对照 ——\n\n")
+    book.append("—— 【原文】与讲解对照 ——\n\n")
     total_chars = 0
     for lo, hi, part_title in (PART1, PART2):
         book.append(f"# {part_title}\n")

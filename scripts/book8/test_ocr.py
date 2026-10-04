@@ -9,13 +9,13 @@ from PIL import Image
 from rapidocr_onnxruntime import RapidOCR
 
 sys.stdout.reconfigure(encoding="utf-8")
-PWD = "791780048"
+PWD = "00000000"
 engine = RapidOCR()
 
 CASES = [
-    (r"<资料目录>\八字\书籍整理\基础-第五版.pdf", [10, 60, 150]),
-    (r"<资料目录>\八字\书籍整理\2019年7月深圳班.pdf", [15, 60]),
-    (r"<资料目录>\八字\书籍整理\2018年11月.pdf", [20, 80]),
+    (r"<资料目录>\书籍整理\基础-第五版.pdf", [10, 60, 150]),
+    (r"<资料目录>\书籍整理\2019年7月课堂记录.pdf", [15, 60]),
+    (r"<资料目录>\书籍整理\2018年11月.pdf", [20, 80]),
 ]
 
 

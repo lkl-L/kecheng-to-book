@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""把 9 个《地理千金赋》小节 md 合并成全书 markdown（保留【经文】【讲解】标记行）"""
+"""把 9 个小节 md 合并成全书 markdown（保留【原文】【讲解】标记行）"""
 import os
 import sys
 
@@ -32,9 +32,9 @@ def convert_section(text):
 
 def main():
     book = []
-    book.append("# 《地理千金赋》精讲实录\n")
-    book.append("讲师《地理千金赋》精讲九讲 · 全文整理本\n")
-    book.append("—— 经文原文与白话讲解对照 ——\n")
+    book.append("# 《【书名】》精讲实录\n")
+    book.append("【课程名】精讲九讲 · 全文整理本\n")
+    book.append("—— 【原文】与讲解对照 ——\n")
     book.append("书中（图X-N　……）为课程视频画面的图说，标注词均照录视频原图；"
                 "对应原图收录于《图文课图册》，可对照观看。\n\n")
     total_chars = 0
@@ -47,7 +47,7 @@ def main():
         t = open(p, encoding="utf-8").read()
         title, body = convert_section(t)
         total_chars += len(body)
-        book.append(f"## 千金赋精讲 {cn[n-1]}：{title}\n")
+        book.append(f"## 精讲 {cn[n-1]}：{title}\n")
         book.append(body + "\n")
     md = "\n".join(book)
     open(OUT, "w", encoding="utf-8").write(md)

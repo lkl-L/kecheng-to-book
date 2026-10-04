@@ -21,7 +21,7 @@ OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "audio_check.json
 SAMPLES = [
     (r"01.某课程（60 集）", ".mp4"),
     (r"4.讲师丰水词典（抖音直播全程精华回放）", None),
-    (r"07.某微课堂（音频+讲义）", ".mp3"),
+    (r"【课程目录名】", ".mp3"),
     (r"15、形势系统精讲课视频74集", None),
 ]
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""把各书 md 排成统一的书籍版式 docx（v2 版式，风水书系列）。
+"""把各书 md 排成统一的书籍版式 docx（v2 版式）。
 
 v2 相对 v1 的改进
   1. 四级标题体系统一：编/卷(H1) → 章/节(H2) → 小节「一、」(H3) → 目「（一）」(H4)
@@ -38,9 +38,9 @@ ALL_BOOKS = [
     "经典课实录",
     "赋文课实录",
     "图文课实录",
-    "日课课实录",
+    "【书名】",
     "实战课实录",
-    "微课堂实录",
+    "【书名】",
 ]
 
 # 各书的讲授者（书名 → 讲授者）；留空则封面只署整理者
@@ -459,7 +459,7 @@ def build(name):
             in_cite = False
         elif kind == "mark":
             add_marker(doc, text)
-            in_cite = (text == "【经文】")
+            in_cite = (text == "【原文】")   # 正文块标记，按你的稿子改
         elif kind in ("sub3", "sub4"):
             add_sub(doc, text, 3 if kind == "sub3" else 4)
             in_cite = False

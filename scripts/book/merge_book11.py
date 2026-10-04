@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""把 33 个《雪心赋》小节 md 合并成全书 markdown（保留【经文】【讲解】标记行）"""
+"""把 33 个小节 md 合并成全书 markdown（保留【原文】【讲解】标记行）"""
 import os
 import re
 import sys
@@ -33,9 +33,9 @@ def convert_section(text):
 
 def main():
     book = []
-    book.append("# 《雪心赋》精讲实录\n")
-    book.append("讲师《雪心赋》解读三十三讲 · 全文整理本\n")
-    book.append("—— 经文原文与白话讲解对照 ——\n\n")
+    book.append("# 《【书名】》精讲实录\n")
+    book.append("【课程名】解读三十三讲 · 全文整理本\n")
+    book.append("—— 【原文】与讲解对照 ——\n\n")
     total_chars = 0
     for n in range(1, 34):
         p = os.path.join(SRC, f"11-{n:03d}.md")

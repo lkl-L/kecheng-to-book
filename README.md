@@ -4,6 +4,7 @@
 按课分章或按内容分卷、删废话保知识点，排版成书籍版式，加带页码目录，导出 `docx` + `PDF`。
 
 > 这是一套在实践中跑出来的流水线，不是一个 prompt 模板。核心主张是：**内容靠子代理判断，格式靠脚本保证，每一步都有可复核的硬校验。**
+> 与具体领域无关：把方法、脚本、版式规范给你，**错字表、术语表、书目清单由你自己在 `references/` 模板里长出来。**
 
 ---
 
@@ -12,7 +13,8 @@
 - 你有一整门课的录音／视频（几十小时，按"课／讲／天"组织），想转成文字稿并编成一本书；
 - 你有一个装满讲义的本地目录（PDF / docx / 扫描件），想整理成一本"XX 基础"；
 - 你已经有了文字稿，但**排版不行**——标题和正文分不开、段落一坨、页码目录不对；
-- 你想把某本书里**成体系的某一支内容整章抽出来**另成一册，正文只留主干。
+- 你想把某本书里**成体系的某一支内容整章抽出来**另成一册，正文只留主干；
+- 你想把散落各处的**实例／案例**单独编成一本题解式的书。
 
 不适用：从零撰写原创内容（这套流程处理的是"已有素材的整理与成书"）。
 
@@ -22,20 +24,22 @@
 
 ```
 lecture-materials-to-book/
-├── SKILL.md                    # 技能主文档（规范 + 流水线 + 踩坑），装进 skill 目录即可用
+├── SKILL.md                        # 技能主文档（规范 + 流水线 + 踩坑），装进 skill 目录即可用
 ├── README.md
-├── references/                 # 写作规范模板（各场景一份，按需改写）
-│   ├── STYLE_GUIDE.book.md     # 课程音视频成书
-│   ├── STYLE_GUIDE.book8.md    # 本地资料（讲义+扫描件 OCR）成书
-│   └── STYLE_GUIDE.book9.md    # 实战命例集
+├── references/                     # 写作规范模板（三种场景各一份，按需复制改写）
+│   ├── STYLE_GUIDE.course.md       # 课程音视频成书
+│   ├── STYLE_GUIDE.materials.md    # 本地资料（讲义 + 扫描件 OCR）成书
+│   └── STYLE_GUIDE.cases.md        # 实例／案例集
 └── scripts/
-    ├── pipeline/               # 转写与配图（流水线第 1 步）
-    ├── book/                   # 课程音视频成书（含版式 v2、再分段 v3）
-    ├── book8/                  # 本地资料成书（含 OCR、体系抽离）
-    └── book9/                  # 命例集（素材分诊与分卷）
+    ├── pipeline/                   # 转写与配图（流水线第 1 步）
+    ├── book/                       # 课程音视频成书（含版式 v2、再分段 v3）
+    ├── book8/                      # 本地资料成书（含 OCR、体系抽离）
+    └── book9/                      # 案例集（素材分诊与分卷）
 ```
 
 `SKILL.md` 里为保持原项目习惯使用了 `$T/book/xxx.py` 这类写法，**仓库路径对照表在 SKILL.md 顶部**。
+
+**`references/` 三份是模板，不是成品**：开工时复制一份进你的项目（如 `<项目根>/book/STYLE_GUIDE.md`），把占位符换成你的课程信息，再逐课追加错字表与专用说明。子代理整理每一节时都会完整读它——它是质量的总闸门。
 
 ---
 
@@ -121,7 +125,7 @@ python scripts/book/update_toc.py
 | `audio_utils.py` | 音频切片、重采样 |
 | `cuda_env.py` | CUDA DLL 路径配置（让 faster-whisper 走 GPU） |
 | `bench_speed.py` / `probe_duration.py` | 转写速度基准 / 音视频时长探测 |
-| `batch_qjj.py` | 批量任务驱动 |
+| `batch_scene_frames.py` | 批量场景抽帧驱动（python 循环，避开中文文件名） |
 | `grab_frames.py` / `scene_frames.py` | 按时间点抓帧 / 按场景变化抓帧（配图素材） |
 | `insert_figures.py` / `build_album.py` | 配图插入 docx / 生成图册 docx |
 | `volume_check.py` | 音量与电平静音检测（排查"转写稿明显偏短"） |
@@ -136,7 +140,7 @@ python scripts/book/update_toc.py
 | `format_books.py` | **版式 v2 批量排版**（四级标题、TOC 域、图注样式） |
 | `update_toc.py` | 用 Word COM 更新目录页码 → 保存 → 导出 PDF |
 | `strip_italic.py` | **清除斜体**（按 part 比对，超出预期即放弃写入） |
-| `split_scripture.py` | 经文按节切分 |
+| `split_scripture.py` | 参照原文按节切分（逐句讲解课用） |
 | `merge_book*.py` / `insert_book*.py` | 各书合并与插入 docx（6+6 个，作为模板参考） |
 | `format_bookYT.py` | 单本定制版式示例 |
 | `check_pages.py` / `check_pages_all.py` | 页数与大纲核对 |
@@ -150,16 +154,16 @@ python scripts/book/update_toc.py
 | `format_book8.py` | 版式 v2（本地资料版，`LECTURER` 留空则封面只署整理者） |
 | `reparagraph.py` | 再分段引擎（按章处理版，与 `book/` 同源） |
 | `merge_bookBZ.py` | 汇编成书（编/章三级骨架） |
-| `build_jiyao.py` | **姊妹册汇编示例**：从备份稿回捞整段，另成一册 |
+| `build_companion.py` | **姊妹册汇编示例**：从备份稿回捞整段，另成一册 |
 | `strip_brand_extract.py` | **去品牌化 + 体系抽离示例**（改中性词、整章抽出） |
 | `strip_season.py` | 按内容框架抽章／抽节示例（可重入，含编号重排） |
 | `update_toc.py` / `check_all.py` / `check_pages_all.py` | 收尾校验与导出 |
 
-### `scripts/book9/` — 命例集
+### `scripts/book9/` — 案例集
 
 | 脚本 | 作用 |
 |---|---|
-| `extract_cases.py` | 从 OCR 素材抽取命例 |
+| `extract_cases.py` | 从 OCR 素材抽取实例 |
 | `census.py` / `triage.py` | 素材盘点与分级（去重、按质量排序） |
 | `clean_brand.py` | 素材层去品牌清理（放在子代理之前，防照抄） |
 | `build_volumes.py` | 分卷汇编 |
@@ -188,7 +192,8 @@ python scripts/book/update_toc.py
 
 本仓库为**通用版**：
 
-- 路径一律写作占位符（`<项目根>`、`<转写源目录>`、`<媒体盘>`、`<资料目录>`、`<venv>`、`<WorkBuddy安装目录>`），使用时替换为自己的实际目录；
+- 与具体领域无关：文中出现的课程名、书名、卷名均为**结构示范**，不指向任何具体作品；
+- 路径一律写作占位符（`<项目根>`、`<转写源目录>`、`<媒体盘>`、`<资料目录>`、`<venv>`），使用时替换为自己的实际目录；
 - 人名、品牌名、机构名统一用 `【品牌名】`、`【讲授者】`、`【机构名】` 占位；
 - 不含任何具体项目的课程清单与进度记录；文中的页数、字数、段落数等统计是真实的量级，可作参数参考；
-- 脚本顶部常量（`ALL_BOOKS`、`BOOKS`、`LECTURER`、`VOLUMES`、`RENAME` 等）里的书名与替换表均为示例，按自己的项目改写即可。
+- 脚本顶部常量（`ALL_BOOKS`、`BOOKS`、`LECTURER`、`VOLUMES`、`RENAME` 等）里的书名与替换表均为占位示例，按自己的项目改写即可。

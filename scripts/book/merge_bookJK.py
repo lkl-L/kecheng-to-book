@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""把 30 个《某日课课程》小节 md 合并成全书 markdown（保留【讲解】标记行）"""
+"""把 30 个《【书名】》小节 md 合并成全书 markdown（保留【讲解】标记行）"""
 import os
 import sys
 
@@ -7,7 +7,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(BASE, "sec-md")
-OUT = os.path.join(BASE, "日课课实录.md")
+OUT = os.path.join(BASE, "【书名】.md")
 
 CN = "一二三四五六七八九十"
 
@@ -46,8 +46,8 @@ def convert_section(text):
 
 def main():
     book = []
-    book.append("# 《某日课课程》精讲实录\n")
-    book.append("讲师团队《某日课课程》三十讲 · 全文整理本\n")
+    book.append("# 《【书名】》精讲实录\n")
+    book.append("【课程名】三十讲 · 全文整理本\n")
     book.append("—— 依讲义与讲课录音整理 ——\n\n")
     total_chars = 0
     for n in range(1, 31):
@@ -58,7 +58,7 @@ def main():
         t = open(p, encoding="utf-8").read()
         title, body = convert_section(t)
         total_chars += len(body)
-        book.append(f"## 日课精讲 {cn_num(n)}：{title}\n")
+        book.append(f"## 精讲 {cn_num(n)}：{title}\n")
         book.append(body + "\n")
     md = "\n".join(book)
     open(OUT, "w", encoding="utf-8").write(md)

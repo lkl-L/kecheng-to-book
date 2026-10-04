@@ -12,8 +12,8 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 import edsdk  # noqa: E402
 
-MD = os.path.join(os.path.dirname(os.path.abspath(__file__)), "微课堂实录.md")
-OUT_DOCX = os.path.join(os.path.dirname(os.path.abspath(__file__)), "微课堂实录.docx")
+MD = os.path.join(os.path.dirname(os.path.abspath(__file__)), "【书名】.md")
+OUT_DOCX = os.path.join(os.path.dirname(os.path.abspath(__file__)), "【书名】.docx")
 
 
 def call(tool, args, timeout=180):

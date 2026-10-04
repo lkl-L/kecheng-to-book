@@ -17,10 +17,8 @@ from faster_whisper import WhisperModel  # noqa
 ROOT = r"<媒体盘>/<课程目录>"
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bench.json")
 
-PROMPT = ("这是风水堪舆课程讲座。术语：寻龙点穴、龙脉、过峡、开帐、束气、蜂腰鹤膝、"
-          "砂、水口、明堂、案山、朝山、青龙白虎、朱雀玄武、疑龙经、撼龙经、雪心赋、"
-          "倒杖、葬法、峦头、理气、三合、三元、九星、贪狼巨门、罗盘分金、消砂纳水、"
-          "阴阳宅、卫星地图、【机构名】。")
+PROMPT = ("这是【课程领域】讲座。术语：【把本课程的专有名词、术语、人名罗列在此，"
+          "越全越好】。")
 
 
 def main():

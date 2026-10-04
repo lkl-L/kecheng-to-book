@@ -17,7 +17,7 @@ for f in fs:
     h2 = len(re.findall(r"^### ", t, re.M))
     bold = t.count("**")
     lst = len(re.findall(r"^\s*[-*]\s", t, re.M)) + len(re.findall(r"^\s*\d+[.、]\s", t, re.M))
-    typo = [w for w in ["易风", "己经", "因该", "以经", "躁土", "温土", "三型", "六害", "淡蔗录", "泊山篇"] if w in t]
+    typo = [w for w in TYPO_WORDS if w in t]
     rep = [w for w in ["记者", "据报道", "本文认为", "综上所述", "值得一提的是"] if w in t]
     hd = re.search(r"^## .+$", t, re.M)
     flag = ""

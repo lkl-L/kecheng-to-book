@@ -435,7 +435,7 @@ def build(name):
             in_cite = False
         elif kind == "mark":
             add_marker(doc, text)
-            in_cite = (text == "【经文】")
+            in_cite = (text == "【原文】")   # 正文块标记，按你的稿子改
         elif kind in ("sub3", "sub4"):
             add_sub(doc, text, 3 if kind == "sub3" else 4)
             in_cite = False

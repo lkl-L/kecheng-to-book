@@ -6,8 +6,8 @@ import win32com.client as win32
 
 sys.stdout.reconfigure(encoding="utf-8")
 BASE = os.path.dirname(os.path.abspath(__file__))
-DOCX = os.path.join(BASE, "微课堂实录.docx")
-PDF = os.path.join(BASE, "微课堂实录.pdf")
+DOCX = os.path.join(BASE, "【书名】.docx")
+PDF = os.path.join(BASE, "【书名】.pdf")
 
 word = win32.Dispatch("Word.Application")
 word.Visible = False

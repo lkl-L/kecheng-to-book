@@ -7,9 +7,9 @@
 captions_all.md 每个图块格式:
 ### 图 2-3
 - 讲次: 2
-- 标题: 卫星图：某某龙局
+- 标题: 图 N-M　某某示意
 - 时间: 08:15-12:40
-- 文件: figures/qjj/lesson02/slides/s012_xxx.jpg
+- 文件: figures/<课程前缀>/lesson02/slides/s012_xxx.jpg
 - 图说: 这里写一段完整图说，可多行，直到空行结束
 
 块与块之间用空行分隔。
@@ -95,11 +95,11 @@ def build(md_path, out_docx, book_title, intro):
 
 
 if __name__ == "__main__":
-    md = sys.argv[1] if len(sys.argv) > 1 else os.path.join(BASE, "figures/qjj/captions_all.md")
+    md = sys.argv[1] if len(sys.argv) > 1 else os.path.join(BASE, "figures/<课程前缀>/captions_all.md")
     out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(BASE, "book/图文课图册.docx")
-    title = sys.argv[3] if len(sys.argv) > 3 else "《地理千金赋》精讲图册"
+    title = sys.argv[3] if len(sys.argv) > 3 else "【书名】图册"
     intro = sys.argv[4] if len(sys.argv) > 4 else (
-        "本图册收录《地理千金赋》九讲课程视频中出现的图例——卫星地形图、沙盘示意、"
+        "本图册收录课程视频中出现的图例——演示画面、板书、示意图、"
         "书影与板书，按讲次编排。每图配时间点，可与《图文课实录》对照阅读；"
         "正文相应位置亦标注了\"参见图册\"。")
     build(md, out, title, intro)
