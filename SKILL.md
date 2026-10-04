@@ -1,5 +1,5 @@
 ---
-name: lecture-materials-to-book
+name: kecheng-to-book
 description: 把课程/讲座资料（音视频转写稿、讲义 PDF/docx、扫描件）编纂成"按课分章或按内容分卷、删废话保知识点"的书籍，并排版成书籍版式、加带页码目录、导出 docx + PDF。当用户要求"整理成书/转写成书/继续下一门课/按文件夹做成书/编成实录/整理一本 XX 基础书"，或给出某个课程、某个资料目录要求成书时使用。**已有默认规范（第〇节）：v2 版式（四级标题/目录只收1-2级）+ 正文再分段提行 v3 + 一律正体（无斜体）+ 零品牌脱敏，以后所有书照做不必再问**。内含整套流水线脚本、本地资料提取与 OCR、书籍版式排版（TOC 域算页码）、写作规范维护方法、**去品牌化脱敏与体系抽离（把某套标志性方法论整章抽出另成一册）**、已知踩坑与校验口径。
 agent_created: true
 ---
@@ -18,7 +18,7 @@ agent_created: true
 > | `<项目根>/book8/STYLE_GUIDE.md` | `references/STYLE_GUIDE.materials.md` |
 > | `<项目根>/book9/STYLE_GUIDE.md` | `references/STYLE_GUIDE.cases.md` |
 >
-> **安装**：把整个仓库放进 `~/.workbuddy/skills/lecture-materials-to-book/`（或任何 skill 目录）即可被识别。
+> **安装**：把整个仓库放进 `~/.workbuddy/skills/kecheng-to-book/`（或任何 skill 目录）即可被识别。
 > **可移植性**：脚本一律用 `__file__` 相对定位，不依赖绝对路径；项目特有的书单、课程名、前缀写在脚本顶部常量里（如 `ALL_BOOKS`、`BOOKS`、`LECTURER`），换项目时改这几处即可。
 > **环境要求**：Windows + Microsoft Word（目录页码与 PDF 导出走 Word COM），Python 3.11+，依赖见 `README.md`。
 >

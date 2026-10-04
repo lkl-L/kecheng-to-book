@@ -1,4 +1,4 @@
-# lecture-materials-to-book
+# kecheng-to-book
 
 把**课程／讲座资料**（音视频转写稿、讲义 PDF/docx、扫描件）编纂成**书籍**的 Agent Skill：
 按课分章或按内容分卷、删废话保知识点，排版成书籍版式，加带页码目录，导出 `docx` + `PDF`。
@@ -23,7 +23,7 @@
 ## 目录结构
 
 ```
-lecture-materials-to-book/
+kecheng-to-book/
 ├── SKILL.md                        # 技能主文档（规范 + 流水线 + 踩坑），装进 skill 目录即可用
 ├── README.md
 ├── references/                     # 写作规范模板（三种场景各一份，按需复制改写）
@@ -48,7 +48,7 @@ lecture-materials-to-book/
 把整个仓库放进 skill 目录：
 
 ```bash
-git clone <你的仓库地址> ~/.workbuddy/skills/lecture-materials-to-book
+git clone <你的仓库地址> ~/.workbuddy/skills/kecheng-to-book
 ```
 
 （Claude Code / 其他支持 Agent Skill 的客户端同理，放进其 skills 目录即可。）
